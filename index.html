@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -7,9 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #7e57c2;
-            --primary-dark: #5e35b1;
-            --accent: #ff4081;
+            --primary: #4A6FA5;
+            --primary-dark: #3A5985;
+            --accent: #6B8E23;
+            --accent-dark: #5A7A1A;
             --dark: #121212;
             --dark-surface: #1e1e1e;
             --dark-card: #252525;
@@ -67,6 +69,31 @@
             font-size: 32px;
         }
         
+        /* Mobile Menu Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--text);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        nav {
+            display: flex;
+        }
+        
         nav ul {
             display: flex;
             list-style: none;
@@ -87,28 +114,7 @@
         
         nav ul li a:hover, nav ul li a.active {
             color: var(--primary);
-            background-color: rgba(126, 87, 194, 0.1);
-        }
-        
-        .auth-section {
-            display: flex;
-            align-items: center;
-        }
-        
-        .login-btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s;
-            margin-left: 15px;
-        }
-        
-        .login-btn:hover {
-            background-color: var(--primary-dark);
+            background-color: rgba(74, 111, 165, 0.1);
         }
         
         /* Main Content Styles */
@@ -149,7 +155,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(126, 87, 194, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(74, 111, 165, 0.1) 0%, transparent 70%);
             animation: pulse 8s infinite linear;
         }
         
@@ -172,48 +178,6 @@
             color: var(--text-secondary);
         }
         
-        .rate-box {
-            background-color: var(--dark-card);
-            padding: 30px;
-            border-radius: 12px;
-            max-width: 400px;
-            margin: 0 auto;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-        
-        .rate-box h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: var(--accent);
-        }
-        
-        .rate-value {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 15px 0;
-        }
-        
-        .buy-btn {
-            background-color: var(--accent);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 18px;
-            width: 100%;
-            margin-top: 20px;
-            transition: background-color 0.3s;
-        }
-        
-        .buy-btn:hover {
-            background-color: #e91e63;
-        }
-        
-        /* Offer Section */
         .offer-section {
             background-color: var(--dark-card);
             border-radius: 12px;
@@ -241,6 +205,61 @@
             font-size: 24px;
             color: var(--text);
             margin-bottom: 20px;
+        }
+        
+        .robux-slider-container {
+            margin: 30px 0;
+            padding: 0 10px;
+        }
+        
+        .robux-slider {
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: var(--dark-surface);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .robux-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .robux-slider::-webkit-slider-thumb:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+        
+        .slider-values {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .buy-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+            width: 100%;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .buy-btn:hover {
+            background-color: var(--accent-dark);
         }
         
         .offer-note {
@@ -562,7 +581,7 @@
         }
         
         .submit-payment:hover {
-            background-color: #e91e63;
+            background-color: var(--accent-dark);
         }
         
         /* Success Message */
@@ -625,20 +644,39 @@
         /* Responsive Styles */
         @media (max-width: 768px) {
             .header-content {
-                flex-direction: column;
+                flex-direction: row;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark-surface);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+                z-index: 99;
+            }
+            
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
             }
             
             nav ul {
-                margin: 20px 0;
+                flex-direction: column;
+                width: 100%;
+                padding: 20px;
             }
             
             nav ul li {
-                margin: 0 10px;
-            }
-            
-            .auth-section {
-                width: 100%;
-                justify-content: center;
+                margin: 10px 0;
             }
             
             .hero h1 {
@@ -664,7 +702,7 @@
                 font-size: 28px;
             }
             
-            .rate-box {
+            .offer-section {
                 padding: 20px;
             }
             
@@ -682,7 +720,7 @@
                 padding: 12px;
             }
         }
-    </style>
+        </style>
 </head>
 <body>
     <header>
@@ -692,7 +730,14 @@
                     <i class="fas fa-coins"></i>
                     coin2_game
                 </a>
-                <nav>
+                
+                <button class="menu-toggle" id="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <nav id="main-nav">
                     <ul>
                         <li><a href="#" class="nav-link active" data-page="home">Главная</a></li>
                         <li><a href="#" class="nav-link" data-page="profile">Профиль</a></li>
@@ -700,9 +745,6 @@
                         <li><a href="#" class="nav-link" data-page="support">Поддержка</a></li>
                     </ul>
                 </nav>
-                <div class="auth-section">
-                    <button class="login-btn">Войти</button>
-                </div>
             </div>
         </div>
     </header>
@@ -714,33 +756,24 @@
                 <div class="hero">
                     <h1>Покупайте Robux по лучшей цене!</h1>
                     <p>Пополни баланс Roblox быстро и просто, без входа в аккаунт.<br>Удобная оплата и доступные методы доставки.</p>
-                    
-                    <div class="rate-box">
-                        <h2>Текущий курс</h2>
-                        <div class="rate-value">1 RUB = 3 Robux</div>
-                        <p>Без комиссии и скрытых платежей</p>
-                        <button class="buy-btn" id="open-payment">Купить Robux</button>
-                    </div>
                 </div>
                 
                 <div class="offer-section">
                     <h2>Лучший курс Robux</h2>
-                    <div class="offer-price">159 ₽</div>
-                    <div class="offer-robux">= 400 R$</div>
+                    <div class="offer-price" id="offer-price">159 ₽</div>
+                    <div class="offer-robux" id="offer-robux">= 400 R$</div>
+                    
+                    <div class="robux-slider-container">
+                        <input type="range" min="100" max="5000" value="400" class="robux-slider" id="robux-slider">
+                        <div class="slider-values">
+                            <span>100 R$</span>
+                            <span>5000 R$</span>
+                        </div>
+                    </div>
+                    
                     <p>Вы заплатите:</p>
                     <button class="buy-btn" id="open-offer-payment">Купить Robux</button>
                     <p class="offer-note">Robux будут доставлены в течение 3 дней без комиссии!</p>
-                </div>
-                
-                <div class="user-search">
-                    <h2>Найти пользователя Roblox</h2>
-                    <div class="search-form">
-                        <input type="text" class="search-input" placeholder="Введите никнейм">
-                        <button class="search-btn">Найти</button>
-                    </div>
-                    <div class="search-results">
-                        <!-- Результаты поиска будут здесь -->
-                    </div>
                 </div>
                 
                 <div class="reviews-section">
@@ -783,9 +816,16 @@
             
             <!-- Профиль -->
             <section id="profile" class="page">
-                <h1>Профиль</h1>
-                <p>Здесь вы можете управлять своим профилем и настройками.</p>
-                <!-- Дополнительный контент -->
+                <div class="user-search">
+                    <h2>Найти пользователя Roblox</h2>
+                    <div class="search-form">
+                        <input type="text" class="search-input" placeholder="Введите никнейм">
+                        <button class="search-btn">Найти</button>
+                    </div>
+                    <div class="search-results">
+                        <!-- Результаты поиска будут здесь -->
+                    </div>
+                </div>
             </section>
             
             <!-- Маркет -->
@@ -836,13 +876,13 @@
                 
                 <div class="form-group">
                     <label for="robux-amount">Количество Robux</label>
-                    <input type="number" id="robux-amount" class="form-control" placeholder="300" min="3" required>
-                    <small>Минимальная покупка: 3 Robux</small>
+                    <input type="number" id="robux-amount" class="form-control" placeholder="400" min="100" required readonly>
+                    <small>Минимальная покупка: 100 Robux</small>
                 </div>
                 
                 <div class="form-group">
                     <label for="total-cost">Итоговая стоимость</label>
-                    <input type="text" id="total-cost" class="form-control" value="100 RUB" readonly>
+                    <input type="text" id="total-cost" class="form-control" value="159 RUB" readonly>
                 </div>
                 
                 <button type="submit" class="submit-payment">Оплатить</button>
@@ -872,11 +912,24 @@
     </footer>
 
     <script>
+        // Мобильное меню
+        const menuToggle = document.getElementById('menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+        
         // Навигация по страницам
         document.querySelectorAll('.nav-link, .logo, .footer-links a').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const pageId = this.getAttribute('data-page');
+                
+                // Закрываем мобильное меню
+                mainNav.classList.remove('active');
+                menuToggle.classList.remove('active');
                 
                 // Убираем активный класс у всех ссылок
                 document.querySelectorAll('.nav-link').forEach(item => {
@@ -898,8 +951,20 @@
             });
         });
         
+        // Слайдер для выбора количества Robux
+        const robuxSlider = document.getElementById('robux-slider');
+        const offerPrice = document.getElementById('offer-price');
+        const offerRobux = document.getElementById('offer-robux');
+        
+        robuxSlider.addEventListener('input', function() {
+            const robuxAmount = parseInt(this.value);
+            const cost = Math.ceil(robuxAmount / 3);
+            
+            offerPrice.textContent = `${cost} ₽`;
+            offerRobux.textContent = `= ${robuxAmount} R$`;
+        });
+        
         // Модальное окно оплаты
-        const openPaymentBtn = document.getElementById('open-payment');
         const openOfferPaymentBtn = document.getElementById('open-offer-payment');
         const paymentModal = document.getElementById('payment-modal');
         const closeModalBtn = document.querySelector('.close-modal');
@@ -908,13 +973,12 @@
         const robuxAmountInput = document.getElementById('robux-amount');
         const totalCostInput = document.getElementById('total-cost');
         
-        openPaymentBtn.addEventListener('click', () => {
-            paymentModal.classList.add('active');
-        });
-        
         openOfferPaymentBtn.addEventListener('click', () => {
-            robuxAmountInput.value = 400;
-            totalCostInput.value = '159 RUB';
+            const robuxAmount = parseInt(robuxSlider.value);
+            const cost = Math.ceil(robuxAmount / 3);
+            
+            robuxAmountInput.value = robuxAmount;
+            totalCostInput.value = `${cost} RUB`;
             paymentModal.classList.add('active');
         });
         
@@ -927,13 +991,6 @@
             if (e.target === paymentModal) {
                 paymentModal.classList.remove('active');
             }
-        });
-        
-        // Расчет стоимости
-        robuxAmountInput.addEventListener('input', () => {
-            const robuxAmount = parseInt(robuxAmountInput.value) || 0;
-            const cost = Math.ceil(robuxAmount / 3);
-            totalCostInput.value = `${cost} RUB`;
         });
         
         // Определение типа карты
@@ -1034,7 +1091,7 @@
                 successMessage.classList.remove('active');
                 paymentForm.style.display = 'block';
                 paymentForm.reset();
-                totalCostInput.value = '100 RUB';
+                totalCostInput.value = '159 RUB';
                 cardTypeElement.innerHTML = '<i class="far fa-credit-card"></i>';
             }, 5000);
         });
