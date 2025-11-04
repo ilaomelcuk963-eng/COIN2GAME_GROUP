@@ -17,6 +17,8 @@
             --text: #e0e0e0;
             --text-secondary: #aaaaaa;
             --alert: #ff4444;
+            --paypal: #0070ba;
+            --paypal-dark: #005ea6;
         }
 
         * {
@@ -802,7 +804,7 @@
             font-size: 14px;
         }
 
-                /* Fireworks Animation */
+        /* Fireworks Animation */
         .fireworks-container {
             position: fixed;
             top: 0;
@@ -1090,6 +1092,99 @@
             font-weight: 600;
         }
 
+        /* Payment Method Selection */
+        .payment-methods {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .payment-method {
+            flex: 1;
+            background-color: var(--dark-surface);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-method.active {
+            border-color: var(--primary);
+            background-color: rgba(74, 111, 165, 0.1);
+        }
+
+        .payment-method i {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .payment-method.credit-card i {
+            color: var(--primary);
+        }
+
+        .payment-method.paypal i {
+            color: var(--paypal);
+        }
+
+        /* PayPal Button */
+        .paypal-btn {
+            background-color: var(--paypal);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .paypal-btn:hover {
+            background-color: var(--paypal-dark);
+        }
+
+        /* Additional Animations */
+        .fade-in {
+            animation: fadeIn 0.8s ease;
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease;
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.8s ease;
+        }
+
+        .bounce-in {
+            animation: bounceIn 0.8s ease;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
         /* Responsive Styles */
         @media (max-width: 768px) {
             .header-content {
@@ -1140,6 +1235,10 @@
 
             .ranks-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .payment-methods {
+                flex-direction: column;
             }
         }
 
@@ -1497,7 +1596,7 @@
                         </div>
                         <button class="admin-btn btn-primary" id="add-rank">Добавить ранг</button>
                         
-<table class="admin-table">
+                        <table class="admin-table">
                             <thead>
                                 <tr>
                                     <th>Ранг</th>
@@ -1513,12 +1612,12 @@
                     </div>
 
                     <div class="admin-section">
-                        <h3>Синхронизация с Google Drive</h3>
+                        <h3>Синхронизация с Яндекс.Диском</h3>
                         <div class="admin-actions">
-                            <button class="admin-btn btn-primary" id="sync-data">Синхронизировать данные</button>
-                            <button class="admin-btn btn-primary" id="export-data">Экспорт в Google Drive</button>
+                            <button class="admin-btn btn-primary" id="sync-yandex">Синхронизировать с Яндекс.Диском</button>
+                            <button class="admin-btn btn-primary" id="export-yandex">Экспорт в Яндекс.Диск</button>
                         </div>
-                        <div id="sync-status" style="margin-top: 10px; color: var(--text-secondary);"></div>
+                        <div id="yandex-status" style="margin-top: 10px; color: var(--text-secondary);"></div>
                     </div>
                 </div>
             </section>
@@ -1547,29 +1646,51 @@
         <div class="modal-content">
             <button class="close-modal">&times;</button>
             <h2>Оплата Robux</h2>
+            
+            <div class="payment-methods">
+                <div class="payment-method credit-card active" data-method="card">
+                    <i class="far fa-credit-card"></i>
+                    <p>Банковская карта</p>
+                </div>
+                <div class="payment-method paypal" data-method="paypal">
+                    <i class="fab fa-paypal"></i>
+                    <p>PayPal</p>
+                </div>
+            </div>
+            
             <form id="payment-form">
-                <div class="form-group">
-                    <label for="card-number">Номер карты</label>
-                    <input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456" required>
-                    <div class="card-type" id="card-type">
-                        <i class="far fa-credit-card"></i>
+                <div id="card-payment">
+                    <div class="form-group">
+                        <label for="card-number">Номер карты</label>
+                        <input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456" required>
+                        <div class="card-type" id="card-type">
+                            <i class="far fa-credit-card"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiry-date">Срок действия</label>
+                            <input type="text" id="expiry-date" class="form-control" placeholder="ММ/ГГ" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" class="form-control" placeholder="123" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="card-holder">Имя владельца карты</label>
+                        <input type="text" id="card-holder" class="form-control" placeholder="IVAN IVANOV" required>
                     </div>
                 </div>
                 
-                <div class="form-row">
+                <div id="paypal-payment" style="display: none;">
                     <div class="form-group">
-                        <label for="expiry-date">Срок действия</label>
-                        <input type="text" id="expiry-date" class="form-control" placeholder="ММ/ГГ" required>
+                        <label for="paypal-email">Email PayPal</label>
+                        <input type="email" id="paypal-email" class="form-control" placeholder="example@mail.com">
                     </div>
-                    <div class="form-group">
-                        <label for="cvv">CVV</label>
-                        <input type="text" id="cvv" class="form-control" placeholder="123" required>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="card-holder">Имя владельца карты</label>
-                    <input type="text" id="card-holder" class="form-control" placeholder="IVAN IVANOV" required>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 15px;">После нажатия кнопки "Оплатить через PayPal" вы будете перенаправлены на страницу PayPal для завершения платежа.</p>
                 </div>
                 
                 <div class="form-group">
@@ -1583,7 +1704,8 @@
                     <input type="text" id="total-cost" class="form-control" value="159 RUB" readonly>
                 </div>
                 
-                <button type="submit" class="submit-payment">Оплатить</button>
+                <button type="submit" class="submit-payment" id="card-payment-btn">Оплатить</button>
+                <button type="button" class="paypal-btn" id="paypal-payment-btn" style="display: none;">Оплатить через PayPal</button>
             </form>
             
             <div class="success-message" id="success-message">
@@ -1789,6 +1911,33 @@
         const successMessage = document.getElementById('success-message');
         const robuxAmountInput = document.getElementById('robux-amount');
         const totalCostInput = document.getElementById('total-cost');
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        const cardPayment = document.getElementById('card-payment');
+        const paypalPayment = document.getElementById('paypal-payment');
+        const cardPaymentBtn = document.getElementById('card-payment-btn');
+        const paypalPaymentBtn = document.getElementById('paypal-payment-btn');
+        
+        // Выбор способа оплаты
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', function() {
+                paymentMethods.forEach(m => m.classList.remove('active'));
+                this.classList.add('active');
+                
+                const paymentType = this.getAttribute('data-method');
+                
+                if (paymentType === 'card') {
+                    cardPayment.style.display = 'block';
+                    paypalPayment.style.display = 'none';
+                    cardPaymentBtn.style.display = 'block';
+                    paypalPaymentBtn.style.display = 'none';
+                } else if (paymentType === 'paypal') {
+                    cardPayment.style.display = 'none';
+                    paypalPayment.style.display = 'block';
+                    cardPaymentBtn.style.display = 'none';
+                    paypalPaymentBtn.style.display = 'block';
+                }
+            });
+        });
         
         openOfferPaymentBtn.addEventListener('click', () => {
             const robuxAmount = parseInt(robuxSlider.value);
@@ -2000,7 +2149,7 @@
             }, duration * 1000);
         }
         
-        // Обработка формы оплаты
+        // Обработка формы оплаты картой
         paymentForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
@@ -2010,7 +2159,8 @@
                 robux: parseInt(robuxAmountInput.value),
                 cost: totalCostInput.value,
                 timestamp: new Date().toLocaleString(),
-                status: 'Обрабатывается'
+                status: 'Обрабатывается',
+                paymentMethod: 'Карта'
             };
             
             siteData.orders.push(order);
@@ -2044,6 +2194,76 @@
                 discount = 0;
                 updatePrice();
             }, 5000);
+        });
+
+        // Обработка оплаты через PayPal
+        paypalPaymentBtn.addEventListener('click', () => {
+            const paypalEmail = document.getElementById('paypal-email').value;
+            const robuxAmount = parseInt(robuxAmountInput.value);
+            let cost = Math.ceil(robuxAmount / 3);
+            
+            // Применяем скидки
+            if (discount > 0) {
+                cost = Math.ceil(cost * (1 - discount/100));
+            }
+            if (promoApplied) {
+                cost = Math.ceil(cost * 0.5);
+            }
+            
+            if (!paypalEmail) {
+                alert('Пожалуйста, введите email PayPal');
+                return;
+            }
+            
+            // Создаем заказ
+            const order = {
+                id: siteData.nextOrderId++,
+                robux: robuxAmount,
+                cost: `${cost} RUB`,
+                timestamp: new Date().toLocaleString(),
+                status: 'Ожидает оплаты PayPal',
+                paymentMethod: 'PayPal',
+                paypalEmail: paypalEmail
+            };
+            
+            siteData.orders.push(order);
+            saveData();
+            
+            // Эмуляция перенаправления на PayPal
+            paymentForm.style.display = 'none';
+            successMessage.textContent = 'Перенаправляем на PayPal для завершения платежа...';
+            successMessage.classList.add('active');
+            
+            // Отслеживаем покупку через PayPal
+            trackVisit('paypal_payment_initiated', `${order.robux} R$ за ${order.cost}`);
+            
+            // Эмуляция завершения платежа через PayPal
+            setTimeout(() => {
+                successMessage.textContent = 'Платеж через PayPal успешно завершен! Ваши Robux будут доставлены в течение 3 дней.';
+                
+                // Обновляем статус заказа
+                order.status = 'Обрабатывается';
+                saveData();
+                
+                // Запускаем анимации
+                createFireworks(order.robux);
+                createRobuxRain(order.robux);
+                
+                // Обновляем историю покупок
+                renderPurchaseHistory();
+                
+                // Через 5 секунд закрываем модальное окно
+                setTimeout(() => {
+                    paymentModal.classList.remove('active');
+                    successMessage.classList.remove('active');
+                    paymentForm.style.display = 'block';
+                    paymentForm.reset();
+                    totalCostInput.value = '159 RUB';
+                    promoApplied = false;
+                    discount = 0;
+                    updatePrice();
+                }, 5000);
+            }, 3000);
         });
 
         // Подключение аккаунта Roblox
@@ -2252,7 +2472,8 @@
             // Обновляем средний рейтинг
             updateAverageRating();
         }
-                // Функция обновления среднего рейтинга
+        
+        // Функция обновления среднего рейтинга
         function updateAverageRating() {
             if (siteData.reviews.length === 0) {
                 averageRatingElement.textContent = '0';
@@ -2563,28 +2784,28 @@
             }
         });
 
-        // Синхронизация с Google Drive (эмуляция)
-        const syncDataBtn = document.getElementById('sync-data');
-        const exportDataBtn = document.getElementById('export-data');
-        const syncStatus = document.getElementById('sync-status');
+        // Синхронизация с Яндекс.Диском (эмуляция)
+        const syncYandexBtn = document.getElementById('sync-yandex');
+        const exportYandexBtn = document.getElementById('export-yandex');
+        const yandexStatus = document.getElementById('yandex-status');
         
-        syncDataBtn.addEventListener('click', function() {
-            syncStatus.innerHTML = '<div class="loading"></div> Синхронизация с Google Drive...';
+        syncYandexBtn.addEventListener('click', function() {
+            yandexStatus.innerHTML = '<div class="loading"></div> Синхронизация с Яндекс.Диском...';
             
             // Эмуляция синхронизации
             setTimeout(() => {
-                syncStatus.textContent = 'Данные успешно синхронизированы с Google Drive';
-                trackVisit('sync_google_drive');
+                yandexStatus.textContent = 'Данные успешно синхронизированы с Яндекс.Диском';
+                trackVisit('sync_yandex_disk');
             }, 2000);
         });
         
-        exportDataBtn.addEventListener('click', function() {
-            syncStatus.innerHTML = '<div class="loading"></div> Экспорт данных в Google Drive...';
+        exportYandexBtn.addEventListener('click', function() {
+            yandexStatus.innerHTML = '<div class="loading"></div> Экспорт данных в Яндекс.Диск...';
             
             // Эмуляция экспорта
             setTimeout(() => {
-                syncStatus.textContent = 'Данные успешно экспортированы в Google Drive';
-                trackVisit('export_google_drive');
+                yandexStatus.textContent = 'Данные успешно экспортированы в Яндекс.Диск';
+                trackVisit('export_yandex_disk');
             }, 2000);
         });
 
