@@ -6,6 +6,7 @@
     <title>Coin2Game - Премиум Robux Store</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Все существующие стили остаются без изменений */
         :root {
             --primary: #4A6FA5;
             --primary-dark: #3A5985;
@@ -1663,12 +1664,6 @@
                             Отзывы
                         </a>
                     </div>
-                    <div class="nav-item">
-                        <a href="#" class="nav-link" data-page="admin-login">
-                            <i class="fas fa-cog"></i>
-                            Админ
-                        </a>
-                    </div>
                 </div>
             </div>
 
@@ -1811,7 +1806,8 @@
                                 <i class="fab fa-vk"></i>
                             </div>
                             <h3>Вконтакте</h3>
-                            <a href="https://vk.com/kupit_robux_koroblox" target="_blank">@kupit_robux_koroblox</a>
+                            <!-- ВСТАВЬТЕ ВАШУ ССЫЛКУ ВКОНТАКТЕ ЗДЕСЬ -->
+                            <a href="https://vk.com/YOUR_VK_LINK" target="_blank">@your_vk_link</a>
                             <p>Ответ в течение 5 минут</p>
                         </div>
                         <div class="support-contact">
@@ -1819,7 +1815,8 @@
                                 <i class="fab fa-telegram"></i>
                             </div>
                             <h3>Telegram</h3>
-                            <a href="https://t.me/koroblox_store" target="_blank">@koroblox_store</a>
+                            <!-- ВСТАВЬТЕ ВАШУ ССЫЛКУ TELEGRAM ЗДЕСЬ -->
+                            <a href="https://t.me/YOUR_TELEGRAM_LINK" target="_blank">@your_telegram_link</a>
                             <p>Мгновенная связь</p>
                         </div>
                         <div class="support-contact">
@@ -1827,7 +1824,8 @@
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <h3>Email</h3>
-                            <a href="mailto:support@coin2game.com">support@coin2game.com</a>
+                            <!-- ВСТАВЬТЕ ВАШ EMAIL ЗДЕСЬ -->
+                            <a href="mailto:your_email@example.com">your_email@example.com</a>
                             <p>Ответ в течение часа</p>
                         </div>
                     </div>
@@ -1901,49 +1899,11 @@
                     </div>
 
                     <div class="reviews-container" id="reviews-container">
-                        <div class="review-card">
-                            <div class="review-header">
-                                <div class="reviewer">Алексей</div>
-                                <div class="stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                            <div class="review-text">Отличный сервис! Robux пришли быстро, без проблем. Очень доволен покупкой!</div>
-                        </div>
-                        <div class="review-card">
-                            <div class="review-header">
-                                <div class="reviewer">Мария</div>
-                                <div class="stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                            </div>
-                            <div class="review-text">Хорошие цены, но пришлось немного подождать доставки. В целом всё понравилось.</div>
-                        </div>
-                        <div class="review-card">
-                            <div class="review-header">
-                                <div class="reviewer">Дмитрий</div>
-                                <div class="stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                            <div class="review-text">Пользуюсь регулярно, всегда всё четко и быстро! Лучший сервис по продаже Robux.</div>
-                        </div>
+                        <!-- Отзывы будут загружаться здесь -->
                     </div>
                     <div class="average-rating">
                         <div class="rating-display">
-                            <div class="rating-stars">
+                            <div class="rating-stars" id="average-stars">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -1953,20 +1913,6 @@
                             Средняя оценка: <span class="rating-value" id="average-rating">4.8</span>/5
                         </div>
                     </div>
-                </div>
-            </section>
-
-            <!-- Админ панель -->
-            <section id="admin-login" class="page">
-                <div class="admin-login floating">
-                    <h2>🔐 Вход в админ-панель</h2>
-                    <div class="form-group">
-                        <input type="password" id="admin-password" class="form-control" placeholder="Введите пароль">
-                    </div>
-                    <button class="buy-btn" id="admin-login-btn">
-                        <i class="fas fa-sign-in-alt"></i>
-                        Войти
-                    </button>
                 </div>
             </section>
 
@@ -2107,29 +2053,7 @@
         let siteData = {
             visitors: [],
             orders: [],
-            reviews: [
-                {
-                    id: 1,
-                    name: "Алексей",
-                    rating: 5,
-                    text: "Отличный сервис! Robux пришли быстро, без проблем.",
-                    timestamp: "2024-01-15 14:30:00"
-                },
-                {
-                    id: 2,
-                    name: "Мария",
-                    rating: 4,
-                    text: "Хорошие цены, но пришлось немного подождать доставки.",
-                    timestamp: "2024-01-14 16:45:00"
-                },
-                {
-                    id: 3,
-                    name: "Дмитрий",
-                    rating: 5,
-                    text: "Пользуюсь регулярно, всегда всё четко и быстро!",
-                    timestamp: "2024-01-13 10:20:00"
-                }
-            ],
+            reviews: [],
             promotions: [
                 {
                     id: 1,
@@ -2150,7 +2074,7 @@
                     quantity: 10
                 }
             ],
-            nextReviewId: 4,
+            nextReviewId: 1,
             nextOrderId: 1,
             stats: {
                 total_sold: 15847,
@@ -2201,7 +2125,85 @@
                     document.querySelector('.preloader').style.display = 'none';
                 }, 500);
             }, 2000);
+            
+            // Загрузка отзывов из облачного хранилища
+            loadReviewsFromCloud();
         });
+
+        // Функция для загрузки отзывов из облачного хранилища
+        async function loadReviewsFromCloud() {
+            try {
+                // ВСТАВЬТЕ ВАШ IP-АДРЕС СЕРВЕРА ЗДЕСЬ
+                const serverIP = "YOUR_SERVER_IP_HERE";
+                
+                const response = await fetch(`http://${serverIP}/api/reviews`);
+                if (response.ok) {
+                    const reviews = await response.json();
+                    siteData.reviews = reviews;
+                    renderReviews();
+                    updateAverageRating();
+                } else {
+                    // Если сервер недоступен, загружаем демо-отзывы
+                    loadDemoReviews();
+                }
+            } catch (error) {
+                console.error("Ошибка загрузки отзывов:", error);
+                // Если сервер недоступен, загружаем демо-отзывы
+                loadDemoReviews();
+            }
+        }
+
+        // Функция для загрузки демо-отзывов
+        function loadDemoReviews() {
+            siteData.reviews = [
+                {
+                    id: 1,
+                    name: "Алексей",
+                    rating: 5,
+                    text: "Отличный сервис! Robux пришли быстро, без проблем. Очень доволен покупкой!",
+                    timestamp: "2024-01-15 14:30:00"
+                },
+                {
+                    id: 2,
+                    name: "Мария",
+                    rating: 4,
+                    text: "Хорошие цены, но пришлось немного подождать доставки. В целом всё понравилось.",
+                    timestamp: "2024-01-14 16:45:00"
+                },
+                {
+                    id: 3,
+                    name: "Дмитрий",
+                    rating: 5,
+                    text: "Пользуюсь регулярно, всегда всё четко и быстро! Лучший сервис по продаже Robux.",
+                    timestamp: "2024-01-13 10:20:00"
+                }
+            ];
+            siteData.nextReviewId = 4;
+            renderReviews();
+            updateAverageRating();
+        }
+
+        // Функция для сохранения отзывов в облачное хранилище
+        async function saveReviewsToCloud() {
+            try {
+                // ВСТАВЬТЕ ВАШ IP-АДРЕС СЕРВЕРА ЗДЕСЬ
+                const serverIP = "YOUR_SERVER_IP_HERE";
+                
+                const response = await fetch(`http://${serverIP}/api/reviews`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(siteData.reviews)
+                });
+                
+                if (!response.ok) {
+                    console.error("Ошибка сохранения отзывов");
+                }
+            } catch (error) {
+                console.error("Ошибка сохранения отзывов:", error);
+            }
+        }
 
         // Долгая анимация дождя Robux
         function createExtendedRobuxRain(robuxCount) {
@@ -2447,8 +2449,12 @@
                 
                 siteData.reviews.push(review);
                 
+                // Сохраняем в облачное хранилище
+                saveReviewsToCloud();
+                
                 // Перерисовываем отзывы
                 renderReviews();
+                updateAverageRating();
                 
                 // Сбрасываем форму
                 this.reset();
@@ -2468,7 +2474,11 @@
                     
                     let starsHtml = '';
                     for (let i = 0; i < 5; i++) {
-                        starsHtml += `<i class="fas fa-star${i < review.rating ? '' : '-half-alt'}"></i>`;
+                        if (i < review.rating) {
+                            starsHtml += '<i class="fas fa-star"></i>';
+                        } else {
+                            starsHtml += '<i class="far fa-star"></i>';
+                        }
                     }
                     
                     reviewCard.innerHTML = `
@@ -2477,10 +2487,40 @@
                             <div class="stars">${starsHtml}</div>
                         </div>
                         <div class="review-text">${review.text}</div>
+                        <div class="review-date" style="margin-top: 10px; font-size: 0.8rem; color: var(--text-secondary);">${review.timestamp}</div>
                     `;
                     
                     container.appendChild(reviewCard);
                 });
+            }
+
+            function updateAverageRating() {
+                if (siteData.reviews.length === 0) {
+                    document.getElementById('average-rating').textContent = '0.0';
+                    return;
+                }
+                
+                const totalRating = siteData.reviews.reduce((sum, review) => sum + review.rating, 0);
+                const averageRating = (totalRating / siteData.reviews.length).toFixed(1);
+                
+                document.getElementById('average-rating').textContent = averageRating;
+                
+                // Обновляем звезды средней оценки
+                const averageStars = document.getElementById('average-stars');
+                averageStars.innerHTML = '';
+                
+                const fullStars = Math.floor(averageRating);
+                const hasHalfStar = averageRating % 1 >= 0.5;
+                
+                for (let i = 0; i < 5; i++) {
+                    if (i < fullStars) {
+                        averageStars.innerHTML += '<i class="fas fa-star"></i>';
+                    } else if (i === fullStars && hasHalfStar) {
+                        averageStars.innerHTML += '<i class="fas fa-star-half-alt"></i>';
+                    } else {
+                        averageStars.innerHTML += '<i class="far fa-star"></i>';
+                    }
+                }
             }
 
             // Покупка акций
@@ -2522,6 +2562,7 @@
 
             // Инициализация отзывов
             renderReviews();
+            updateAverageRating();
         });
     </script>
 </body>
